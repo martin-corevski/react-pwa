@@ -2,6 +2,9 @@
 
 React 16 PWA (Workbox and Firebase) setup with Webpack 4, axios, React Router 4 and Redux Saga. More **information on the setup** [project](https://github.com/martin-corevski/react-basics) and [wiki](https://github.com/martin-corevski/react-basics/wiki/DIY-repository-setup). For the **http requests basics** [project](https://github.com/martin-corevski/react-basics-http) and [wiki](https://github.com/martin-corevski/react-basics-http/wiki/DIY-repository-setup). For **routing basics** [project](https://github.com/martin-corevski/react-basics-routing) and [wiki](https://github.com/martin-corevski/react-basics-routing/wiki/DIY-repository-setup). For **redux basics** [project](https://github.com/martin-corevski/react-basics-redux) and [wiki](https://github.com/martin-corevski/react-basics-redux/wiki/DIY-repository-setup)
 
+You can also check this project's [wiki](https://github.com/martin-corevski/react-pwa/wiki/DIY-repository-setup).
+This project is based on my [react-redux-app](https://github.com/martin-corevski/react-redux-app).
+
 ---
 ## Install dependencies
 
