@@ -23,7 +23,9 @@ class ReduxReady extends Component {
         <hr />
         {this.props.nums ? this.props.nums.join(' ') : ''}
         <h4>Errors: </h4>
-        {this.props.error}
+        {typeof this.props.error === 'string'
+          ? this.props.error
+          : JSON.stringify(this.props.error)}
         <hr />
         <h1>Notify me when a number is added</h1>
         {/* We can hide the button as soon as we have an active subscription */}

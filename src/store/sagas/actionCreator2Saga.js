@@ -1,6 +1,7 @@
 import { put } from 'redux-saga/effects'
 import axios from '../../axios'
 import { readAllData, writeData, clearAllData } from '../../services/utility'
+import { addedToSyncQueueNotification } from '../../services/notificationsMgmt'
 
 import * as actionCreators from '../actions'
 
@@ -14,6 +15,7 @@ export function * storeDataSaga (action) {
     yield axios.post(url, number)
     yield put(actionCreators.addNumber(number.num))
   } catch (error) {
+    yield addedToSyncQueueNotification()
     yield put(actionCreators.addNumberError(error))
   }
 }

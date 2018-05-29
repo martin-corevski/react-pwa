@@ -2,7 +2,7 @@
 import axios from '../axios'
 import { urlBase64ToUint8Array } from './utility'
 
-const displayNotification = () => {
+const displayEnableNotification = () => {
   // The content that is a must see in the notification should be part of the
   // title and the body. This is because these two settings will mostly likely
   // be shown on every device whereas the others might not. For example the
@@ -53,12 +53,34 @@ const displayNotification = () => {
   }
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(function (sw) {
-      console.log('[displayNotification] Notifications subscription from SW')
+      console.log(
+        '[displayEnableNotification] Notifications subscription from SW'
+      )
       sw.showNotification('Successfully subscribed!', options)
     })
   } else {
-    // new Notification('Successfully subscribed!', options)
     Notification('Successfully subscribed!', options)
+  }
+}
+
+const displaySyncNotification = () => {
+  var options = {
+    body: 'The number will be upload as soon as you get internet connection!',
+    icon: 'assets/icons/app-icon-96x96.png',
+    dir: 'ltr',
+    lang: 'en-US',
+    vibrate: [100, 50, 200, 50, 100],
+    badge: 'assets/icons/app-icon-96x96.png',
+    tag: 'sync-queue-notification',
+    renotify: true
+  }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(function (sw) {
+      console.log('[displaySyncNotification] Number added to sync queue')
+      sw.showNotification('Number added to sync queue!', options)
+    })
+  } else {
+    Notification('Number added to sync queue!', options)
   }
 }
 
@@ -102,7 +124,7 @@ const configurePushSubscription = () => {
     })
     .then(res => {
       if (res.statusText === 'OK' || res.status === 200) {
-        displayNotification()
+        displayEnableNotification()
       }
     })
     .catch(err => {
@@ -117,8 +139,18 @@ export const enableNotifications = () => {
     if (result !== 'granted') {
       console.log('[enableNotifications] No permission granted!')
     } else {
-      // displayNotification()
+      // displayEnableNotification()
       configurePushSubscription()
+    }
+  })
+}
+
+export const addedToSyncQueueNotification = () => {
+  Notification.requestPermission(result => {
+    if (result !== 'granted') {
+      console.log('[addedToSyncQueueNotification] No permission granted!')
+    } else {
+      displaySyncNotification()
     }
   })
 }
