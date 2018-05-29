@@ -3,7 +3,7 @@
 React 16 PWA (Workbox and Firebase) setup with Webpack 4, axios, React Router 4 and Redux Saga. More **information on the setup** [project](https://github.com/martin-corevski/react-basics) and [wiki](https://github.com/martin-corevski/react-basics/wiki/DIY-repository-setup). For the **http requests basics** [project](https://github.com/martin-corevski/react-basics-http) and [wiki](https://github.com/martin-corevski/react-basics-http/wiki/DIY-repository-setup). For **routing basics** [project](https://github.com/martin-corevski/react-basics-routing) and [wiki](https://github.com/martin-corevski/react-basics-routing/wiki/DIY-repository-setup). For **redux basics** [project](https://github.com/martin-corevski/react-basics-redux) and [wiki](https://github.com/martin-corevski/react-basics-redux/wiki/DIY-repository-setup)
 
 You can also check this project's [wiki](https://github.com/martin-corevski/react-pwa/wiki/DIY-repository-setup).
-This project is based on my [react-redux-app](https://github.com/martin-corevski/react-redux-app).
+This project is a PWA upgrade of my [react-redux-app](https://github.com/martin-corevski/react-redux-app) repository.
 
 ---
 ## Install dependencies
@@ -56,7 +56,7 @@ File functions/index.js already exists. Overwrite? No
 
 - Once the initialization is done you will need to set up the constants in the **.env** files and in **functions/index.js**.
 - In order to generate vapid keys, inside `cd functions`, use `npm run web-push generate-vapid-keys`. Copy the keys and paste them inside the previously mentioned files. Remember not to place the private key on the client side, only server side code should know about it. One last thing to download and add to the functions folder is the service account key, make sure when you download it from your firebase Project Overview -> Settings -> Service Accounts screen to rename it into **serviceAccountKey** and make sure it's **.json** file type.
-- When the functions/index.js file is properly set up you can `cd ..` (go to the project directory) and run `firebase deploy --only functions`. If everything goes well you will get a link that ends with **.cloudfunctions.net/storeData** copy that link and update the **.env** files and sw.js file (at the bottom, registerRoute function first argument).
+- When the functions/index.js file is properly set up you can `cd ..` (go to the project directory) and run `firebase deploy --only functions`. If everything goes well you will get a link that ends with **.cloudfunctions.net/storeData** copy that link and update the **.env** files and **sw.js** file (at the bottom, registerRoute function first argument).
 
 - Now you should be able to run the dev-server, build the application and deploy it on firebase.
 
