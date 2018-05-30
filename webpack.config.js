@@ -3,7 +3,6 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -27,13 +26,6 @@ const htmlWebpackHarddiskPlugin = new HtmlWebpackHarddiskPlugin({
    * @type {String}
    */
   outputPath: path.resolve(__dirname, 'dist')
-})
-const extractTextPlugin = new ExtractTextPlugin({
-  /**
-   * Location and filename where the extracted css will be saved.
-   * @type {String}
-   */
-  filename: 'css/index.css'
 })
 const copyWebpackPlugin = new CopyWebpackPlugin(
   [
@@ -255,25 +247,26 @@ module.exports = env => {
         // SCSS, CSS loaders
         {
           test: /\.(css|scss|sass)$/,
-          use: extractTextPlugin.extract({
-            // postcss loader is used in order for autoprefixer to auto add
-            // browser specific prefixes
-            use: [
-              {
-                // the css loader is set up to use CSS modules spec.
-                // More on https://github.com/webpack-contrib/css-loader#modules
-                loader: 'css-loader',
-                options: {
-                  modules: true,
-                  importLoaders: 2, // postcss and sass
-                  localIdentName: '[name]___[local]___[hash:base64:5]'
-                }
-              },
-              'postcss-loader',
-              'sass-loader'
-            ],
-            fallback: 'style-loader'
-          })
+          // postcss loader is used in order for autoprefixer to auto add
+          // browser specific prefixes
+          use: [
+            // the isomorphic style loader is used to extract only the critical
+            // css as inline css in the head tag in order to reduce render-blocking
+            // stylesheets performance problems.
+            'isomorphic-style-loader',
+            {
+              // the css loader is set up to use CSS modules spec.
+              // More on https://github.com/webpack-contrib/css-loader#modules
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 2, // postcss and sass
+                localIdentName: '[name]___[local]___[hash:base64:5]'
+              }
+            },
+            'postcss-loader',
+            'sass-loader'
+          ]
         },
         // File loader for pictures
         {
@@ -334,11 +327,6 @@ module.exports = env => {
            */
         htmlWebpackHarddiskPlugin,
         /**
-           * Extracts css from the bundle.
-           * @type {[type]}
-           */
-        extractTextPlugin,
-        /**
            * Get environment variables by using process.env, options:
            * systemvars (false) - If true, will add all system variables as well
            * silent (false) - If true, all warnings will be surpressed
@@ -376,7 +364,6 @@ module.exports = env => {
         cleanWebpackPlugin,
         htmlWebpackPlugin,
         htmlWebpackHarddiskPlugin,
-        extractTextPlugin,
         /**
            * Official docs https://github.com/webpack/docs/wiki/optimization:
            * Webpack gives our modules and chunks ids to identify them. Webpack can

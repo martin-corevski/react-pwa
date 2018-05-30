@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { enableNotifications } from '../../services/notificationsMgmt'
+import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
+import styles from './ReduxReady.scss'
 import * as actionCreators from '../../store/actions/index'
 
 class ReduxReady extends Component {
@@ -12,7 +14,9 @@ class ReduxReady extends Component {
   render () {
     return (
       <div>
-        <h1>Test redux saga by pressing the buttons</h1>
+        <h1 className={styles.headerSuccess}>
+          Test redux saga by pressing the buttons
+        </h1>
         <h3>{this.props.str}</h3>
         <button onClick={this.props.onAction1} style={{ cursor: 'pointer' }}>
           Test action
@@ -53,4 +57,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxReady)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(ReduxReady)
+)
