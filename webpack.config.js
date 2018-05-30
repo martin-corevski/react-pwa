@@ -301,7 +301,12 @@ module.exports = env => {
            * For production we can uglify the .js files.
            * @type {Boolean}
            */
-        minimize: true
+        minimize: true,
+        // Split code into separate files
+        splitChunks: {
+          // include all types of chunks
+          chunks: 'all'
+        }
       },
     /**
      * The plugins option is used to customize the Webpack build process in
