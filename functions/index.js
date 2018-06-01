@@ -16,6 +16,7 @@ const storageUrl = ''
 // Set your generated vapid public and private keys
 const vapidPublicKey = ''
 const vapidPrivateKey = ''
+const vapidDetailsEmail = ''
 
 // Set your firebase db url and service account key inside the functions folder
 const serviceAccount = require('./serviceAccountKey.json')
@@ -113,7 +114,11 @@ exports.storeData = functions.https.onRequest(function (request, response) {
       .then(function () {
         // The first argument is an email address to identify yourself, set your
         // address, example 'mailto:my-email@address.com'
-        webpush.setVapidDetails('', vapidPublicKey, vapidPrivateKey)
+        webpush.setVapidDetails(
+          vapidDetailsEmail,
+          vapidPublicKey,
+          vapidPrivateKey
+        )
         // Get all subscriptions to push notifications from the database
         return admin
           .database()
