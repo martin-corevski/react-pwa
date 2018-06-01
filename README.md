@@ -52,7 +52,7 @@ File functions/package.json already exists. Overwrite? No
 File functions/index.js already exists. Overwrite? No
   Skipping write of functions/index.js
 ```
-- I am declining the use of ESLint inside functions because I use Prettier with StandardJS updated ESLint rules (eslintrc config file), read more [here](https://medium.com/@SupamenDoe/why-not-have-them-all-together-standard-js-with-prettier-and-eslint-fix-9a4d96ca0030).
+- I am declining the use of ESLint inside functions because I use Prettier with StandardJS updated ESLint rules (eslintrc config file), read more [here](https://medium.com/@MartinCorevski/why-not-have-them-all-together-standard-js-with-prettier-and-eslint-fix-9a4d96ca0030).
 
 - Once the initialization is done you will need to set up the constants in the **.env** files and in **functions/index.js**.
 - In order to generate vapid keys, inside `cd functions`, use `npm run web-push generate-vapid-keys`. Copy the keys and paste them inside the previously mentioned files. Remember not to place the private key on the client side, only server side code should know about it. One last thing to download and add to the functions folder is the service account key, make sure when you download it from your firebase Project Overview -> Settings -> Service Accounts screen to rename it into **serviceAccountKey** and make sure it's **.json** file type.
