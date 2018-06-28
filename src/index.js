@@ -4,6 +4,8 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import registerServiceWorker from './registerServiceWorker'
+// Isomorphic style loader context provider
+import ContextProvider from './hoc/ContextProvider'
 
 import './index.scss'
 import App from './containers/App'
@@ -48,10 +50,22 @@ const store = createStore(
 
 sagaMiddleware.run(watchActionCreator2)
 
+// ContextProvider is used in order for isomorphic-style-loader to function properly
+const context = {
+  insertCss: (...styles) => {
+    const removeCss = styles.map(style => style._insertCss())
+    return () => {
+      removeCss.forEach(f => f())
+    }
+  }
+}
+
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ContextProvider context={context}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ContextProvider>,
   document.getElementById('root')
 )
 

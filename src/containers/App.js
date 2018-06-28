@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import ContextProvider from '../hoc/ContextProvider'
 
 import ReduxReady from './ReduxReady/ReduxReady.js'
-
-// ContextProvider is used in order for isomorphic-style-loader to function properly
-const context = {
-  insertCss: styles => styles._insertCss()
-}
 
 class App extends Component {
   constructor (props) {
@@ -64,11 +58,9 @@ class App extends Component {
     // return <h1>Dummy test!</h1>
 
     return (
-      <ContextProvider context={context}>
-        <BrowserRouter>
-          <Route path='/' exact component={ReduxReady} />
-        </BrowserRouter>
-      </ContextProvider>
+      <BrowserRouter>
+        <Route path='/' exact component={ReduxReady} />
+      </BrowserRouter>
     )
   }
 }
